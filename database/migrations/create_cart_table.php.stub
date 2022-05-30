@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create(config('cart.storage_table'), function (Blueprint $table) {
+            $table->string('id');
+
+            $table->unsignedBigInteger(config('cart.user_pk'))->nullable();
+            $table->timestamps();
+
+            $table->foreign(config('cart.user_pk'),config('cart.user_pk').'_on_users')
+                ->on(config('cart.users_table'))
+                ->references('id')
+                ->cascadeOnDelete();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('cart_storage');
+    }
+};

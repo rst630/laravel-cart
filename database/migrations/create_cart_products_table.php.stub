@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create(config('cart.pivot_table'), function (Blueprint $table) {
+            $cart_column = config('cart.storage_table').'_id';
+            $product_column = config('cart.products_table').'_id';
+
+            $table->string($cart_column);
+            $table->string($product_column);
+
+            $table->unsignedBigInteger('quantity');
+            $table->timestamps();
+
+            $table->foreign($cart_column,$cart_column.'_on_'.config('cart.storage_table'))
+                ->on(config('cart.storage_table'))
+                ->references('id')
+                ->cascadeOnDelete();
+
+            $table->foreign($product_column,$product_column.'_on_'.config('cart.products_table'))
+                ->on(config('cart.storage_table'))
+                ->references('id')
+                ->cascadeOnDelete();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('cart_storage');
+    }
+};

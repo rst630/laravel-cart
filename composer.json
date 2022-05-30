@@ -1,0 +1,68 @@
+{
+    "name": "rst630/laravel-cart",
+    "description": "Cart implementation for laravel",
+    "type": "library",
+    "keywords": [
+        "rst630",
+        "laravel",
+        "laravel-cart"
+    ],
+    "homepage": "https://github.com/rst630/laravel-cart",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rst630",
+            "email": "rst630@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "spatie/laravel-package-tools": "^1.9.2",
+        "illuminate/contracts": "^9.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5",
+        "spatie/laravel-ray": "^1.26"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rst630\\Cart\\": "src",
+            "Rst630\\Cart\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rst630\\Cart\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rst630\\Cart\\CartServiceProvider"
+            ],
+            "aliases": {
+                "Cart": "Rst630\\Cart\\Facades\\Cart"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
