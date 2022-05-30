@@ -11,6 +11,11 @@ class Cart extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'laravel-cart';
+        return 'cart';
+    }
+
+    protected static function resolveFacadeInstance($name)
+    {
+        return static::$app[$name];
     }
 }

@@ -9,12 +9,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create(config('cart.storage_table'), function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id')->primary();
 
-            $table->unsignedBigInteger(config('cart.user_pk'))->nullable();
+            $table->unsignedBigInteger(config('cart.user_fk'))->nullable();
             $table->timestamps();
 
-            $table->foreign(config('cart.user_pk'),config('cart.user_pk').'_on_users')
+            $table->foreign(config('cart.user_fk'),config('cart.user_pk').'_on_users')
                 ->on(config('cart.users_table'))
                 ->references('id')
                 ->cascadeOnDelete();

@@ -2,7 +2,6 @@
 
 namespace Rst630\Cart;
 
-use Rst630\Cart\Commands\CartCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -11,10 +10,23 @@ class CartServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-cart')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigrations(['create_cart_table'])
-            ->hasCommand(CartCommand::class);
+            ->name('cart')
+
+            ->hasRoutes('api')
+
+            //php artisan vendor:publish --tag=cart-config
+            ->hasConfigFile('cart')
+
+            //php artisan vendor:publish --tag=cart-migrations
+            ->hasMigrations(['create_cart_table']);
+    }
+
+    public function packageRegistered()
+    {
+        $method = config('cart.singleton') ? 'singleton' : 'bind';
+
+        $this->app->$method('cart', function () {
+            return new Cart();
+        });
     }
 }

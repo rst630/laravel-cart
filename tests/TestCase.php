@@ -4,6 +4,7 @@ namespace Rst630\Cart\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rst630\Cart\CartServiceProvider;
@@ -42,5 +43,17 @@ class TestCase extends Orchestra
             $migration = include $file;
             $migration->up();
         }
+
+        Schema::create(config('cart.products_table'),function($table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('test_products',function($table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 }

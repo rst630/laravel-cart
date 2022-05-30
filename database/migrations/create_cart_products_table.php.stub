@@ -10,20 +10,15 @@ return new class extends Migration
     {
         Schema::create(config('cart.pivot_table'), function (Blueprint $table) {
             $cart_column = config('cart.storage_table').'_id';
-            $product_column = config('cart.products_table').'_id';
-
-            $table->string($cart_column);
-            $table->string($product_column);
-
+            $table->id();
+            $table->string($cart_column)->index();
+            $table->string('model_id');
+            $table->string('model_name');
+            $table->string('model_class');
             $table->unsignedBigInteger('quantity');
             $table->timestamps();
 
             $table->foreign($cart_column,$cart_column.'_on_'.config('cart.storage_table'))
-                ->on(config('cart.storage_table'))
-                ->references('id')
-                ->cascadeOnDelete();
-
-            $table->foreign($product_column,$product_column.'_on_'.config('cart.products_table'))
                 ->on(config('cart.storage_table'))
                 ->references('id')
                 ->cascadeOnDelete();

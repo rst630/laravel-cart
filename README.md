@@ -1,14 +1,16 @@
 
 # Cart implementation for laravel
 
+[![GitHub Tests Action Status](https://github.com/rst630/laravel-cart/workflows/run-tests/badge.svg?branch=main)](https://github.com/rst630/laravel-cart/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://github.com/rst630/laravel-cart/workflows/Check%20&%20fix%20styling/badge.svg?branch=main)](https://github.com/rst630/laravel-cart/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rst630/laravel-cart.svg?style=flat-square)](https://packagist.org/packages/rst630/laravel-cart)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/rst630/laravel-cart/run-tests?label=tests)](https://github.com/rst630/laravel-cart/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/rst630/laravel-cart/Check%20&%20fix%20styling?label=code%20style)](https://github.com/rst630/laravel-cart/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![](https://img.shields.io/github/workflow/status/rst630/laravel-cart/run-tests?label=tests)](https://github.com/rst630/laravel-cart/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/rst630/laravel-cart.svg?style=flat-square)](https://packagist.org/packages/rst630/laravel-cart)
-![example workflow](https://github.com/rst630/laravel-cart/workflows/run-tests/badge.svg?branch=main)
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+
+## This package under development - please don't use it right now!
 
 ## Installation
 
@@ -32,23 +34,20 @@ php artisan vendor:publish --tag="laravel-cart-config"
 ```
 
 This is the contents of the published config file:
-
 ```php
 return [
+    'storage_table'  => 'cart_storage',
+    'pivot_table'    => 'cart_products',
+    'users_table'    => 'users',
+    'user_pk'        => 'user_id',
+    'products_table' => 'products',
 ];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-cart-views"
 ```
 
 ## Usage
 
 ```php
-$cart = new Rst630\Cart();
-echo $cart->echoPhrase('Hello, Rst630!');
+Cart::get();
 ```
 
 ## Testing
