@@ -29,12 +29,11 @@ class CartItem extends Model
 
     public function cart()
     {
-        return $this->belongsTo(CartStorage::class,config('cart.storage_table').'_id','id');
+        return $this->belongsTo(CartStorage::class, config('cart.storage_table').'_id', 'id');
     }
 
     public function product()
     {
-        return $this->belongsTo($this->model_class,'model_id');
+        return $this->belongsTo($this->model_class, 'model_id');
     }
-
 }

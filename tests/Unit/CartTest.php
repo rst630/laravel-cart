@@ -2,14 +2,10 @@
 
 namespace Rst630\Cart\Tests\Unit;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Rst630\Cart\Cartable;
+use Illuminate\Support\Facades\DB;
 use Rst630\Cart\Database\Factories\UserFactory;
 use Rst630\Cart\Facades\Cart;
-use Rst630\Cart\Models\CartItem;
 use Rst630\Cart\Models\CartStorage;
 use Rst630\Cart\Tests\Helpers\ProductModel;
 use Rst630\Cart\Tests\Helpers\ProductTestModel;
@@ -97,15 +93,15 @@ class CartTest extends TestCase
 //                $query->time);
 //        });
 
-        $items = Cart::id($user->id)->set($product,10)->items;
+        $items = Cart::id($user->id)->set($product, 10)->items;
 
-        $this->assertEquals(10,$items->first()->quantity);
+        $this->assertEquals(10, $items->first()->quantity);
 
-        $items = Cart::id($user->id)->set($product,200)->items;
+        $items = Cart::id($user->id)->set($product, 200)->items;
 
-        $this->assertEquals(200,$items->first()->quantity);
+        $this->assertEquals(200, $items->first()->quantity);
 
-        $items = Cart::id($user->id)->set($test_product,300)->items;
+        $items = Cart::id($user->id)->set($test_product, 300)->items;
 
         dump($items->toArray());
     }

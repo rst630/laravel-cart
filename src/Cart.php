@@ -6,11 +6,8 @@ namespace Rst630\Cart;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Rst630\Cart\Models\CartItem;
 use Rst630\Cart\Models\CartStorage;
-use Rst630\Cart\Tests\Helpers\ProductModel;
 
 class Cart
 {
@@ -49,19 +46,19 @@ class Cart
         return $this->$name;
     }
 
-    public function getStorage():CartStorage
+    public function getStorage(): CartStorage
     {
         return CartStorage::firstOrCreate(['id' => $this->id, 'user_id' => $this->user_id]);
     }
 
-    public function set(Cartable $item, int $quantity):CartStorage
+    public function set(Cartable $item, int $quantity): CartStorage
     {
         $this->getStorage()->items()->updateOrCreate([
-            'model_id'        => $item->id,
-            'model_class'     => $item::class,
+            'model_id'    => $item->id,
+            'model_class' => $item::class,
         ], [
-            'model_name'  => $item->name,
-            'quantity'    => $quantity,
+            'model_name' => $item->name,
+            'quantity'   => $quantity,
         ]);
 
         return $this->getStorage();
